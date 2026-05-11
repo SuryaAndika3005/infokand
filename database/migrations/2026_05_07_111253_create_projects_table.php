@@ -6,25 +6,19 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-public function up(): void
-{
-    Schema::create('projects', function (Blueprint $table) {
-        $table->id();
-        $table->string('author');
-        $table->string('title');
-        $table->text('description');
-        $table->string('image_path')->nullable();
-        $table->string('website_url')->nullable();
-        $table->timestamps();
-    });
-}
+    public function up(): void
+    {
+        Schema::create('projects', function (Blueprint $table) {
+            $table->id();
+            $table->string('author');
+            $table->string('title');
+            $table->text('description');
+            $table->string('website_url');
+            $table->string('thumbnail')->nullable(); // TAMBAHAN: Kolom untuk menyimpan path foto
+            $table->timestamps();
+        });
+    }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('projects');

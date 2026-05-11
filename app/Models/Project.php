@@ -2,18 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
-    use HasFactory;
-
-    protected $fillable = [
-        'author', 
-        'title', 
-        'description', 
-        'image_path', 
-        'website_url'
-    ];
+    protected $fillable = ['author', 'title', 'description', 'website_url', 'thumbnail'];
 }
