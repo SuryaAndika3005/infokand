@@ -47,7 +47,7 @@ class DatabaseSeeder extends Seeder
             '2311533011' => 'Radjasa Arya Pradifta',
             '2311532021' => 'Stanley Leonard Darmali',
             '2311533010' => 'Irgi Fatihul Ihsan',
-            '2311533003' => 'Gary Andreas',
+            '2311533004' => 'Gary Andreas',
             '2311532003' => 'Siti Fadhilah Rahmi',
             '2311533009' => 'Irfan Trianda',
             '2311532010' => 'Muhammad Alfarizy',
