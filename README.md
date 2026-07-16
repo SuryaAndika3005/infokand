@@ -1,58 +1,159 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="220" alt="Laravel Logo">
 </p>
 
-## About Laravel
+<h1 align="center">InfoKand</h1>
+<p align="center"><b>Galeri & Showcase Proyek Website Mahasiswa — Informatika Universitas Andalas</b></p>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<p align="center">
+  <img src="https://img.shields.io/badge/Laravel-13.7-red" alt="Laravel">
+  <img src="https://img.shields.io/badge/PHP-8.3%2B-777bb4" alt="PHP">
+  <img src="https://img.shields.io/badge/License-MIT-lightgrey" alt="License">
+</p>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 📖 Tentang Proyek
 
-## Learning Laravel
+**InfoKand** adalah platform galeri berbasis web yang memungkinkan setiap mahasiswa mempublikasikan **satu website/proyek pribadinya** lengkap dengan judul, deskripsi, thumbnail, dan tautan langsung ke situs tersebut. Pengunjung dapat menjelajahi seluruh proyek yang telah dipublikasikan melalui halaman galeri dengan fitur pencarian dan pengurutan.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Setiap mahasiswa login menggunakan **NIM** sebagai username, dengan kewajiban mengganti password default pada login pertama demi keamanan akun.
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## ✨ Fitur Utama
 
-## Agentic Development
+- 🔑 **Login berbasis NIM** — autentikasi menggunakan NIM & password, bukan email.
+- 🔒 **Wajib Ganti Password** — password default (= NIM) harus diganti saat login pertama sebelum mengakses fitur lain.
+- 🖼️ **Satu Proyek per Mahasiswa** — setiap akun hanya dapat mempublikasikan satu website ke galeri.
+- 📤 **Upload & Edit Proyek** — judul, deskripsi, URL website, dan thumbnail (jpeg/png/jpg/webp, maks. 2 MB).
+- 🔍 **Pencarian & Pengurutan** — cari proyek berdasarkan judul atau nama mahasiswa; urutkan berdasarkan terbaru atau nama (A–Z).
+- 🏠 **Halaman Beranda Dinamis** — menampilkan 6 proyek terbaru (*featured projects*) serta proyek milik pengguna yang sedang login.
+- 👤 **Manajemen Profil** — ubah nama, email, dan foto profil.
+- 🛡️ **Keamanan Kepemilikan** — hanya pemilik proyek (dicocokkan berdasarkan nama/author) yang dapat mengedit proyeknya.
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+---
 
-```bash
-composer require laravel/boost --dev
+## 🛠️ Tech Stack
 
-php artisan boost:install
+| Komponen | Teknologi |
+|---|---|
+| Framework Backend | Laravel 13.7 (PHP 8.3+) |
+| Autentikasi | Laravel Auth (custom field `nim`) |
+| Database | SQLite / MySQL (dikonfigurasi via `.env`) |
+| Frontend | Blade Templates, Vite |
+| Penyimpanan File | Laravel Filesystem (`storage/app/public`) |
+| Testing | PHPUnit |
+| Tooling Dev | Laravel Pail, Pint, Tinker |
+
+---
+
+## 📂 Struktur Proyek (Ringkas)
+
+```
+infokand/
+├── app/
+│   ├── Http/Controllers/
+│   │   ├── AuthController.php      # Login, logout, ganti password, profil
+│   │   └── ProjectController.php   # Beranda, galeri, CRUD proyek
+│   └── Models/
+│       ├── User.php
+│       └── Project.php
+├── database/
+│   ├── migrations/                 # users, projects, profile_photo, dll.
+│   └── seeders/DatabaseSeeder.php  # Seed akun mahasiswa berdasarkan NIM
+├── resources/views/
+│   ├── welcome.blade.php           # Beranda / area manajemen
+│   ├── projects.blade.php          # Galeri proyek (search & sort)
+│   ├── project-detail.blade.php
+│   ├── login.blade.php
+│   ├── ganti_password.blade.php
+│   ├── profile.blade.php
+│   └── components/ (navbar, footer)
+├── routes/web.php
+└── public/assets/                  # grainient.js, silk.js (efek visual)
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+---
 
-## Contributing
+## 🚀 Instalasi & Menjalankan
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Prasyarat
 
-## Code of Conduct
+- PHP ≥ 8.3
+- Composer
+- Node.js & NPM
+- SQLite (default) atau MySQL/PostgreSQL
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Langkah Instalasi
 
-## Security Vulnerabilities
+```bash
+# 1. Clone repository
+git clone https://github.com/suryaandika3005/infokand.git
+cd infokand
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+# 2. Install dependensi PHP & JS
+composer install
+npm install
 
-## License
+# 3. Salin file environment & generate app key
+cp .env.example .env
+php artisan key:generate
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+# 4. Konfigurasi database pada .env, lalu jalankan migrasi
+php artisan migrate
+
+# 5. (Opsional) Seed data akun mahasiswa
+php artisan db:seed
+
+# 6. Buat symbolic link storage agar thumbnail/foto profil dapat diakses publik
+php artisan storage:link
+
+# 7. Jalankan aplikasi (server + queue + vite sekaligus)
+composer run dev
+```
+
+Aplikasi akan berjalan pada `http://127.0.0.1:8000`.
+
+> Alternatif menjalankan server saja tanpa Vite/queue: `php artisan serve`
+
+### Kredensial Login Default (hasil seeding)
+
+- **Username:** NIM mahasiswa (contoh: `2311533005`)
+- **Password default:** sama dengan NIM (contoh: `2311533005`)
+- Sistem akan **memaksa penggantian password** pada login pertama.
+
+---
+
+## 🔀 Alur Penggunaan
+
+1. Mahasiswa login menggunakan NIM & password default.
+2. Jika belum pernah mengganti password → diarahkan ke halaman **Ganti Password**.
+3. Setelah password diperbarui → masuk ke halaman **Beranda / Area Manajemen**.
+4. Mahasiswa dapat mempublikasikan **satu proyek** (judul, deskripsi, URL, thumbnail).
+5. Proyek yang telah dipublikasikan tampil di halaman **Galeri** dan dapat dicari/diurutkan oleh pengunjung lain.
+6. Mahasiswa dapat mengedit proyek miliknya kapan saja melalui halaman beranda.
+
+---
+
+## 🧪 Testing
+
+```bash
+composer test
+```
+
+Menjalankan pembersihan konfigurasi (`config:clear`) sebelum eksekusi test suite PHPUnit (`tests/Feature` & `tests/Unit`).
+
+---
+
+## 👤 Kontributor
+
+Proyek dikembangkan sebagai bagian dari kebutuhan internal Program Studi Informatika, Fakultas Teknologi Informasi, Universitas Andalas, untuk mendokumentasikan dan memamerkan karya website mahasiswa.
+
+**Maintainer:** Surya Andika (2311533005)
+
+---
+
+## 📄 Lisensi
+
+Proyek ini berbasis framework [Laravel](https://laravel.com) yang bersifat open-source di bawah [lisensi MIT](https://opensource.org/licenses/MIT).
